@@ -7,14 +7,23 @@
 
 Player::Player(std::string texLocation)
 {
-	Vertex vertices[] = { Vertex(glm::vec3(0.5f, 0.8f, 0.0f), glm::vec2(0.0f, 0.0f)),
-		Vertex(glm::vec3(0.5f, -0.5f, 0.0f), glm::vec2(0.0f, 1.0f)),
-		Vertex(glm::vec3(-0.5f, -0.5f, 0.0f), glm::vec2(1.0f, 1.0f)),
-		Vertex(glm::vec3(-0.5f, 0.8f, 0.0f), glm::vec2(1.0f, 0.0f))
+	Vertex vertices[] = { Vertex(glm::vec3(0.059985f, 0.09f, 0.0f), glm::vec2(0.0f, 0.0f)),
+		Vertex(glm::vec3(0.059985f, -0.09f, 0.0f), glm::vec2(0.0f, 1.0f)),
+		Vertex(glm::vec3(-0.059985f, -0.09f, 0.0f), glm::vec2(1.0f, 1.0f)),
+		Vertex(glm::vec3(-0.059985f, 0.09f, 0.0f), glm::vec2(1.0f, 0.0f))
+	};
+
+	Vertex healthVert[] = { Vertex(glm::vec3(0.0166625f, 0.0166625f, 0.0f), glm::vec2(0.0f, 0.0f)),
+		Vertex(glm::vec3(0.0166625f, -0.0166625f, 0.0f), glm::vec2(0.0f, 1.0f)),
+		Vertex(glm::vec3(-0.0166625f, -0.0166625f, 0.0f), glm::vec2(1.0f, 1.0f)),
+		Vertex(glm::vec3(-0.0166625f, 0.0166625f, 0.0f), glm::vec2(1.0f, 0.0f))
 	};
 
 	_mesh.Init(vertices, sizeof(vertices) / sizeof(vertices[0]));
 	_texture.Init(texLocation);
+
+	_heMesh.Init(healthVert, sizeof(healthVert) / sizeof(healthVert[0]));
+	_heTexture.Init("./res/health/heart.png");
 }
 
 Player::~Player()
@@ -26,9 +35,19 @@ void Player::Bind()
 	_texture.Bind(0);
 }
 
+void Player::BindHealth()
+{
+	_heTexture.Bind(0);
+}
+
 void Player::Render()
 {
 	_mesh.Draw();
+}
+
+void Player::RenderHealth()
+{
+	_heMesh.Draw();
 }
 
 void Player::ChangeSprite(std::string location)
@@ -134,17 +153,22 @@ void Player::Collision(Transform* transform, int width, int height, Level* lev)
 		uWall = false;
 		dWall = false;
 	}
-	else if ((height / 2.0 * 0.0033325) <= transform->GetPos().y + transform->GetScale().y * -1 && dWall)
+	else if (height / 2.0 * 0.0033325 <= transform->GetPos().y + transform->GetScale().y * -1 && dWall)
 	{
 		collDown = true;
 	}
-	else if ((height / 2.0 * 0.0033325)> transform->GetPos().y + transform->GetScale().y * -1 && dWall)
+	else if (height / 2.0 * 0.0033325 > transform->GetPos().y + transform->GetScale().y * -1 && dWall)
 	{
 		collDown = false;
 	}
 }
 
+void Player::SetHealth(float health)
+{
+	Player::health = health;
+}
+
 float Player::GetHealth()
 {
-	return 0.0f;
+	return health;
 }

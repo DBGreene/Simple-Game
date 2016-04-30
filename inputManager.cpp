@@ -56,6 +56,10 @@ void InputManager::RegisterInput()
 			{
 				_left = true;
 			}
+			if (evnt.key.keysym.sym == SDLK_q)
+			{
+				_player->SetHealth(_player->GetHealth() - 1);
+			}
 		}
 			if (evnt.type == SDL_KEYUP)
 			{
