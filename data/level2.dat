@@ -1,0 +1,23 @@
+LEVEL
+{
+	LEFT_EXIT
+	{
+		location:empty
+		data:./data/level3.dat
+	}
+	RIGHT_EXIT
+	{
+		location:./res/levels/lev_1.png
+		data:./data/level1.dat
+	}
+	TOP_EXIT
+	{
+		location:./res/levels/lev_1.png
+		data:./data/level4.dat
+	}
+	BOTTOM_EXIT
+	{
+		location:empty
+		data:wall
+	}
+}
