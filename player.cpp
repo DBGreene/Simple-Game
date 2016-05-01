@@ -13,17 +13,8 @@ Player::Player(std::string texLocation)
 		Vertex(glm::vec3(-0.059985f, 0.09f, 0.0f), glm::vec2(1.0f, 0.0f))
 	};
 
-	Vertex healthVert[] = { Vertex(glm::vec3(0.0166625f, 0.0166625f, 0.0f), glm::vec2(0.0f, 0.0f)),
-		Vertex(glm::vec3(0.0166625f, -0.0166625f, 0.0f), glm::vec2(0.0f, 1.0f)),
-		Vertex(glm::vec3(-0.0166625f, -0.0166625f, 0.0f), glm::vec2(1.0f, 1.0f)),
-		Vertex(glm::vec3(-0.0166625f, 0.0166625f, 0.0f), glm::vec2(1.0f, 0.0f))
-	};
-
 	_mesh.Init(vertices, sizeof(vertices) / sizeof(vertices[0]));
 	_texture.Init(texLocation);
-
-	_heMesh.Init(healthVert, sizeof(healthVert) / sizeof(healthVert[0]));
-	_heTexture.Init("./res/health/heart.png");
 }
 
 Player::~Player()
